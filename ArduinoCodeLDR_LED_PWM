@@ -1,0 +1,19 @@
+//takes input from LDR or other analog inpu
+//turns it into PWM output for LED
+//by Jeremy S. Cook
+
+int ledPin = 3; //LED connected to digital pin 3
+int PWMValue; //Sets PWMValue as integer
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  // read the input on analog pin 0:
+  int sensorValue = analogRead(A0);
+  PWMValue = map(sensorValue, 0, 1023, 0, 255); //maps sensor value into proportional PWM values
+  Serial.println(PWMValue); //print PWMValue (0 to 255) to serial
+  analogWrite(ledPin, PWMValue); //write PWMValue to digital pin 3
+  delay(500); //delay helps one see change, could be omitted
+}
